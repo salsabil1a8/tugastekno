@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Mini Campus Management System</title>
+
+    <!-- Custom fonts for this template-->
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,300,400,600,700,800,900" rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+</head>
+
+<body id="page-top">
+
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+            <!-- Sidebar - Brand -->
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
+                <div class="sidebar-brand-icon rotate-n-15">
+                    <i class="fas fa-university"></i>
+                </div>
+                <div class="sidebar-brand-text mx-3">Campus Mini</div>
+            </a>
+
+            <hr class="sidebar-divider my-0">
+
+            <!-- Nav Item - Dashboard -->
+            <li class="nav-item active">
+                <a class="nav-link" href="#" onclick="showPage('dashboard')">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Dashboard</span></a>
+            </li>
+
+            <hr class="sidebar-divider">
+
+            <!-- Menu Akademik -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseAkademik"
+                    aria-expanded="true" aria-controls="collapseAkademik">
+                    <i class="fas fa-fw fa-book"></i>
+                    <span>Akademik</span>
+                </a>
+                <div id="collapseAkademik" class="collapse" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="#" onclick="showPage('mahasiswa')">Mahasiswa</a>
+                        <a class="collapse-item" href="#" onclick="showPage('dosen')">Dosen</a>
+                        <a class="collapse-item" href="#" onclick="showPage('jadwal')">Jadwal</a>
+                    </div>
+                </div>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="#" onclick="showPage('sso')">
+                    <i class="fas fa-fw fa-sign-in-alt"></i>
+                    <span>SSO</span></a>
+            </li>
+
+            <hr class="sidebar-divider d-none d-md-block">
+
+        </ul>
+        <!-- End of Sidebar -->
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+
+                <!-- Topbar -->
+                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 shadow">
+                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                        <i class="fa fa-bars"></i>
+                    </button>
+                </nav>
+                <!-- End of Topbar -->
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid" id="mainContent">
+
+                    <!-- Default Dashboard Page -->
+                    <div id="dashboard" class="page">
+                        <h1 class="h3 mb-4 text-gray-800">Dashboard Akademik</h1>
+                        <div class="row">
+                            <div class="col-xl-3 col-md-6 mb-4">
+                                <div class="card border-left-primary shadow h-100 py-2">
+                                    <div class="card-body">
+                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                            Total Mahasiswa</div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800" id="totalMhs">0</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-3 col-md-6 mb-4">
+                                <div class="card border-left-success shadow h-100 py-2">
+                                    <div class="card-body">
+                                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                            Total Dosen</div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800" id="totalDosen">0</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-3 col-md-6 mb-4">
+                                <div class="card border-left-info shadow h-100 py-2">
+                                    <div class="card-body">
+                                        <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
+                                            Total Jadwal</div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800" id="totalJadwal">0</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Mahasiswa Page -->
+                    <div id="mahasiswa" class="page" style="display:none;">
+                        <h1 class="h3 mb-4 text-gray-800">Data Mahasiswa</h1>
+                        <table class="table table-bordered" id="tableMhs">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Nama</th>
+                                    <th>NIM</th>
+                                    <th>Program Studi</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+
+                    <!-- Dosen Page -->
+                    <div id="dosen" class="page" style="display:none;">
+                        <h1 class="h3 mb-4 text-gray-800">Data Dosen</h1>
+                        <table class="table table-bordered" id="tableDosen">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Nama</th>
+                                    <th>NIDN</th>
+                                    <th>Departemen</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+
+                    <!-- Jadwal Page -->
+                    <div id="jadwal" class="page" style="display:none;">
+                        <h1 class="h3 mb-4 text-gray-800">Jadwal Kuliah</h1>
+                        <table class="table table-bordered" id="tableJadwal">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Mata Kuliah</th>
+                                    <th>Dosen</th>
+                                    <th>Hari</th>
+                                    <th>Jam</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+
+                    <!-- SSO Page -->
+                    <div id="sso" class="page" style="display:none;">
+                        <h1 class="h3 mb-4 text-gray-800">SSO Sederhana</h1>
+                        <form id="loginForm">
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Username" id="username">
+                            </div>
+                            <div class="form-group">
+                                <input type="password" class="form-control" placeholder="Password" id="password">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Login</button>
+                        </form>
+                        <div id="loginMessage" class="mt-2"></div>
+                    </div>
+
+                </div>
+                <!-- /.container-fluid -->
+
+            </div>
+            <!-- End of Main Content -->
+
+            <footer class="sticky-footer bg-white">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span>Copyright &copy; Campus Mini 2025</span>
+                    </div>
+                </div>
+            </footer>
+
+        </div>
+        <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="js/sb-admin-2.min.js"></script>
+
+    <script>
+        // Data Dummy
+        const mahasiswa = [
+            { nama: "Budi Santoso", nim: "12345", prodi: "Teknik Informatika" },
+            { nama: "Siti Aminah", nim: "12346", prodi: "Sistem Informasi" }
+        ];
+
+        const dosen = [
+            { nama: "Dr. Ahmad", nidn: "001", departemen: "Teknik Informatika" },
+            { nama: "Dr. Lina", nidn: "002", departemen: "Sistem Informasi" }
+        ];
+
+        const jadwal = [
+            { matkul: "Algoritma", dosen: "Dr. Ahmad", hari: "Senin", jam: "08:00-10:00" },
+            { matkul: "Basis Data", dosen: "Dr. Lina", hari: "Selasa", jam: "10:00-12:00" }
+        ];
+
+        // Fungsi switch halaman
+        function showPage(pageId) {
+            document.querySelectorAll('.page').forEach(page => page.style.display = 'none');
+            document.getElementById(pageId).style.display = 'block';
+            if (pageId === 'dashboard') updateDashboard();
+            if (pageId === 'mahasiswa') renderMahasiswa();
+            if (pageId === 'dosen') renderDosen();
+            if (pageId === 'jadwal') renderJadwal();
+        }
+
+        // Render data ke tabel
+        function renderMahasiswa() {
+            const tbody = document.querySelector("#tableMhs tbody");
+            tbody.innerHTML = "";
+            mahasiswa.forEach((mhs, i) => {
+                tbody.innerHTML += `<tr>
+                    <td>${i+1}</td>
+                    <td>${mhs.nama}</td>
+                    <td>${mhs.nim}</td>
+                    <td>${mhs.prodi}</td>
+                </tr>`;
+            });
+        }
+
+        function renderDosen() {
+            const tbody = document.querySelector("#tableDosen tbody");
+            tbody.innerHTML = "";
+            dosen.forEach((d, i) => {
+                tbody.innerHTML += `<tr>
+                    <td>${i+1}</td>
+                    <td>${d.nama}</td>
+                    <td>${d.nidn}</td>
+                    <td>${d.departemen}</td>
+                </tr>`;
+            });
+        }
+
+        function renderJadwal() {
+            const tbody = document.querySelector("#tableJadwal tbody");
+            tbody.innerHTML = "";
+            jadwal.forEach((j, i) => {
+                tbody.innerHTML += `<tr>
+                    <td>${i+1}</td>
+                    <td>${j.matkul}</td>
+                    <td>${j.dosen}</td>
+                    <td>${j.hari}</td>
+                    <td>${j.jam}</td>
+                </tr>`;
+            });
+        }
+
+        // Update dashboard
+        function updateDashboard() {
+            document.getElementById("totalMhs").innerText = mahasiswa.length;
+            document.getElementById("totalDosen").innerText = dosen.length;
+            document.getElementById("totalJadwal").innerText = jadwal.length;
+        }
+
+        // SSO sederhana
+        document.getElementById("loginForm").addEventListener("submit", function(e){
+            e.preventDefault();
+            const username = document.getElementById("username").value;
+            const password = document.getElementById("password").value;
+            if(username === "admin" && password === "1234") {
+                document.getElementById("loginMessage").innerHTML = '<span class="text-success">Login sukses!</span>';
+            } else {
+                document.getElementById("loginMessage").innerHTML = '<span class="text-danger">Username atau password salah!</span>';
+            }
+        });
+
+        // Tampilkan dashboard awal
+        showPage('dashboard');
+    </script>
+</body>
+
+</html>
